@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>西南石油大学邮件登陆系统</title>
+
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .top{
+            width: 100%;
+            height: 80px;
+            background-color: #f5f5f5;
+        }
+        .logo{
+            float: left;
+            margin:20px 200px;
+        }
+        .help{
+            float: right;
+            margin: 35px 195px;
+            color: #787878;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .help:hover{
+            text-decoration: underline;
+        }
+
+        .content{
+            width: 964px;
+            height: 460px;
+            margin:20px auto 0 ;
+            background: url("image/login_bg_03.jpg");
+        }
+        .form{
+            position: absolute;
+            margin: 70px 564px;
+            width: 360px;
+            height: 340px;
+            background-color: #fff;
+            border-radius: 3px;
+        }
+        .title {
+            height: 40px;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            background-color: #E0862B;
+            border-radius: 3px;
+        }
+
+        .login {
+            width: 285px;
+            height: 260px;
+            margin: 25px auto;
+        }
+        .login_title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            width: inherit;
+            height: 30px;
+            line-height: 30px;
+        }
+        #input_user {
+            width: 281px;
+            height: 40px;
+            font: 400 20px Arial;
+            margin-bottom: 30px;
+            background-color: #f5f5f5;
+            border: #787878 1px solid;
+        }
+        #input_user:focus{
+            outline: none;
+            border: #4082D8 2px solid;
+        }
+        #input_pwd {
+            width: 281px;
+            height: 40px;
+            font: 400 20px Arial;
+            margin-bottom: 30px;
+            background-color: #f5f5f5;
+            border: #787878 1px solid;
+        }
+        #input_pwd:focus{
+            outline: none;
+            border: #4082D8 2px solid;
+        }
+
+        .login_help{
+            width: 281px;
+            height: 40px;
+        }
+        .ss{
+            float: left;
+            font-size: 14px;
+            color: red;
+            text-decoration: none;
+        }
+        .fpsd{
+            float: right;
+            color: #787878;
+            font-size: 13px;
+            text-decoration: none;
+        }
+        .fpsd:hover{
+            color: #333;
+            text-decoration: underline;
+        }
+        #login_button {
+            position: relative;
+            left: 143px;
+            width: 142px;
+            height: 38px;
+            background-color: #5095DA;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 400;
+            border: 0;
+            outline: none;
+            border-radius: 2px;
+        }
+
+        #login_button:hover {
+            background-color: #4082D8;
+        }
+
+        .bottom{
+            width: 964px;
+            height: 100px;
+            background-color: #f5f5f5;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 70px;
+            color: #787878;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        s{
+            height: 70px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 70px;
+            color: #787878;
+            font-size: 14px;
+            text-decoration: none;
+        }
+    </style>
+
+    <script>
+        function setCookie(cname,cvalue,exdays){
+            var d = new Date();
+            d.setTime(d.getTime()+(exdays*24*60*60*1000));
+            var expires = "expires="+d.toGMTString();
+            document.cookie = cname+"="+cvalue+"; "+expires;
+        }
+        function getCookie(cname){
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+            }
+            return "";
+        }
+        function checkCookie(){
+            var user=getCookie("username");
+            var uname = document.getElementById("input_user");
+            var pwd=getCookie("pwd");
+            var upwd = document.getElementById("input_pwd");
+
+
+            if (user!=""){
+                var uname = document.getElementById("input_user");
+                uname.value = user;
+                upwd.value = pwd;
+            }
+            else {
+                user = alert("请输入你的名字:","");
+                if (user!="" && user!=null){
+                    setCookie("username",user,30);
+                }
+            }
+        }
+        window.onload = function () {
+            checkCookie();
+        }
+    </script>
+</head>
+<body>
+<div class="top">
+    <div class="logo">
+        <img src="image/login_logo.png" alt="#">
+    </div>
+    <div>
+        <a href="https://mail.swpu.edu.cn/?q=help" class="help">帮助</a>
+    </div>
+</div>
+
+<div class="content">
+
+    <div class="form">
+        <form id='login_form' action="login" method="post">
+            <div class="title">
+                <p>账号登录</p>
+            </div>
+            <div class="login" id="login">
+
+                <div class="login_title" id="login_title">
+                    <p>用户登录</p>
+                </div>
+
+                <input type="text" name="txtName" placeholder="用户名" id="input_user">
+
+                <input type="password" name="txtPwd" placeholder="密码" id="input_pwd">
+
+                <div class="login_help">
+                    <p class="ss">学生选择@stu.swpu.edu.cn</p>
+                    <a href="https://mail.swpu.edu.cn/?q=resetpw" class="fpsd">忘记密码</a>
+                </div>
+                <input type="submit" value="登录" id="login_button" >
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="bottom">西南石油大学</div>
+</body>
+</html>
